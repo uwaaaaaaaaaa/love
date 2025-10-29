@@ -16,10 +16,57 @@ $(function () {
     gardenCtx.globalCompositeOperation = "lighter";
     garden = new Garden(gardenCtx, gardenCanvas);
 	
-	$("#content").css("width", $loveHeart.width() + $("#code").width());
-	$("#content").css("height", Math.max($loveHeart.height(), $("#code").height()));
-	$("#content").css("margin-top", Math.max(($window.height() - $("#content").height()) / 2, 10));
-	$("#content").css("margin-left", Math.max(($window.width() - $("#content").width()) / 2, 10));
+	// $("#content").css("width", $loveHeart.width() + $("#code").width());
+	// $("#content").css("height", Math.max($loveHeart.height(), $("#code").height()));
+	// $("#content").css("margin-top", Math.max(($window.height() - $("#content").height()) / 2, 10));
+	// $("#content").css("margin-left", Math.max(($window.width() - $("#content").width()) / 2, 10));
+
+	if ($(window).width() > 768) {
+		// Desktop: sejajar kiri-kanan
+		$("#content").css({
+			"display": "flex",
+			"flex-direction": "row",
+			"align-items": "center",
+			"justify-content": "center",
+			"width": $loveHeart.width() + $("#code").width(),
+			"height": Math.max($loveHeart.height(), $("#code").height()),
+			"margin-top": Math.max(($(window).height() - $("#content").height()) / 2, 10),
+			"margin-left": Math.max(($(window).width() - $("#content").width()) / 2, 10)
+		});
+	} else {
+		// HP: tumpuk vertikal dan center di layar
+		$("#content").css({
+			"display": "flex",
+			"flex-direction": "column",
+			"align-items": "center",
+			"justify-content": "center",
+			"width": "100%",
+			"min-height": "100vh",
+			"margin": "0 auto",
+			"padding": "20px 0"
+		});
+
+		$("#code").css({
+			"width": "90%",
+			"text-align": "left",
+			"font-size": "14px",
+			"margin-bottom": "20px"
+		});
+
+		$("#loveHeart").css({
+			"width": "90%",
+			"max-width": "400px",
+			"height": "auto",
+			"display": "flex",
+			"justify-content": "center",
+			"align-items": "center"
+		});
+
+		$("#garden").css({
+			"width": "100%",
+			"height": "400px"
+		});
+	}
 
     // renderLoop
     setInterval(function () {
